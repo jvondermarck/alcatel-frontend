@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/utils/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,8 +37,8 @@ class _MyHomePageState extends State<HomePage> {
               const SizedBox(
                 height: 40,
               ),
-              loginTextField('Identifiant'),
-              loginTextField('Mot de passe'),
+              const CustomTextField(label: 'Email', hidden: false),
+              const CustomTextField(label: 'Mot de passe', hidden: true),
               const SizedBox(
                 height: 40,
               ),
@@ -55,26 +56,5 @@ class _MyHomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  SizedBox loginTextField(String hint) {
-    return SizedBox(
-        width: 250,
-        child: TextField(
-          cursorColor: Colors.white,
-          cursorHeight: 20,
-          cursorWidth: 1,
-          keyboardType: TextInputType.visiblePassword,
-          style: const TextStyle(
-              color: Colors.white, decoration: TextDecoration.none),
-          decoration: InputDecoration(
-              hintText: (hint),
-              hintStyle: const TextStyle(color: Colors.white),
-              focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 2, color: Color.fromARGB(255, 142, 138, 138))),
-              enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(width: 2, color: Colors.white))),
-        ));
   }
 }
