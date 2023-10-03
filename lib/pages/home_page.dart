@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/utils/colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +13,13 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color.fromRGBO(97, 67, 209, 1),
-        Color.fromRGBO(97, 67, 209, 0.5)
-      ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+            primaryColor,
+            primaryColorLight,
+          ])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
