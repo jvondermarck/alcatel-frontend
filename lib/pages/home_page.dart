@@ -10,37 +10,44 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(97, 67, 209, 1),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Push To Talk'.toUpperCase(),
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 42),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            loginTextField('Identifiant'),
-            loginTextField('Mot de passe'),
-            const SizedBox(
-              height: 40,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12))),
-              child: const Text('Se connecter'),
-            ),
-          ],
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+        Color.fromRGBO(97, 67, 209, 1),
+        Color.fromRGBO(97, 67, 209, 0.5)
+      ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Push To Talk'.toUpperCase(),
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 42),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              loginTextField('Identifiant'),
+              loginTextField('Mot de passe'),
+              const SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12))),
+                child: const Text('Se connecter'),
+              ),
+            ],
+          ),
         ),
       ),
     );
