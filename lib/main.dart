@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'PushToTalk',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromRGBO(97, 67, 209, 1)),
         useMaterial3: true,
