@@ -39,7 +39,7 @@ class _CanalsPageState extends State<CanalsPage> {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: const Text('Canals'),
+            title: const Text('Liste des canaux'),
             foregroundColor: Colors.white,
             centerTitle: true,
           ),
