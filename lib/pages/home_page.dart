@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/utils/colors.dart';
+import 'package:pushtotalk/pages/canals_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,7 +44,14 @@ class _MyHomePageState extends State<HomePage> {
                 height: 40,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CanalsPage(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.white,
