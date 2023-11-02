@@ -38,57 +38,62 @@ class _CanalsPageState extends State<CanalsPage> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              final _formKey = GlobalKey<FormState>();
               return Dialog(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: SizedBox(
-                  height: 250,
+                child: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        const Text(
-                          'Création du canal',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: <Widget>[
+                          const Text(
+                            'Création du canal',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                        CanalFormField(
-                          title: 'Nom',
-                          hint: 'Ex: titre super cool',
-                          controller: titleController,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        CanalFormField(
-                          title: 'Description',
-                          hint: 'Ex: description tip top',
-                          controller: subtitleController,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            setState(() {
-                              String title = titleController.text;
-                              String subtitle = subtitleController.text;
-                              canalList.add(CanalCard(
-                                title: title,
-                                subtitle: subtitle,
-                              ));
-                            });
-                            titleController.clear();
-                            subtitleController.clear();
-                            Navigator.pop(context);
-                          },
-                          label: const Text('Valider'),
-                          icon: const Icon(Icons.check),
-                        )
-                      ],
+                          CanalFormField(
+                            title: 'Nom',
+                            hint: 'Ex: titre super cool',
+                            controller: titleController,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CanalFormField(
+                            title: 'Description',
+                            hint: 'Ex: description tip top',
+                            controller: subtitleController,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              setState(() {
+                                if (_formKey.currentState!.validate()) {
+                                  String title = titleController.text;
+                                  String subtitle = subtitleController.text;
+                                  canalList.add(CanalCard(
+                                    title: title,
+                                    subtitle: subtitle,
+                                  ));
+                                  Navigator.pop(context);
+                                }
+                              });
+                              titleController.clear();
+                              subtitleController.clear();
+                            },
+                            label: const Text('Valider'),
+                            icon: const Icon(Icons.check),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

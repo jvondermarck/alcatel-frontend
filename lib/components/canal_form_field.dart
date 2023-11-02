@@ -26,6 +26,12 @@ class _CanalFormFieldState extends State<CanalFormField> {
           hintText: widget.hint,
           hintStyle: const TextStyle(fontSize: 12),
           icon: const Icon(Icons.description)),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Veuillez remplir ce champ';
+        }
+        return null;
+      },
     );
   }
 }
