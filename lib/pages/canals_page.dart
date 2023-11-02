@@ -11,8 +11,18 @@ class CanalsPage extends StatefulWidget {
 }
 
 class _CanalsPageState extends State<CanalsPage> {
+  List<CanalCard> canalList = [
+    const CanalCard(title: 'Canal 1', subtitle: 'Description 1'),
+    const CanalCard(title: 'Canal 2', subtitle: 'Description 2'),
+    const CanalCard(title: 'Canal 3', subtitle: 'Description 3'),
+    const CanalCard(title: 'Canal 4', subtitle: 'Description 4'),
+    const CanalCard(title: 'Canal 5', subtitle: 'Description 5'),
+  ];
   @override
   Widget build(BuildContext context) {
+    TextEditingController titleController = TextEditingController();
+    TextEditingController subtitleController = TextEditingController();
+
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -38,13 +48,11 @@ class _CanalsPageState extends State<CanalsPage> {
                   await Future.delayed(const Duration(seconds: 2));
                 },
                 child: ListView.builder(
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return CanalCard(
-                        title: 'Canal $index',
-                        subtitle: 'Description du canal $index',
-                      );
-                    }),
+                  itemCount: canalList.length,
+                  itemBuilder: (context, index) {
+                    return canalList[index];
+                  },
+                ),
               ),
             ),
             floatingActionButton: FloatingActionButton(
@@ -63,19 +71,31 @@ class _CanalsPageState extends State<CanalsPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          const CanalFormField(
-                              title: 'Nom', hint: 'Ex: titre super cool'),
+                          CanalFormField(
+                              title: 'Nom',
+                              hint: 'Ex: titre super cool',
+                              controller: titleController),
                           const SizedBox(
                             height: 10,
                           ),
-                          const CanalFormField(
-                              title: 'Description',
-                              hint: 'Ex: description tip top'),
+                          CanalFormField(
+                            title: 'Description',
+                            hint: 'Ex: description tip top',
+                            controller: subtitleController,
+                          ),
                           const SizedBox(
                             height: 10,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                String title = titleController.text;
+                                String subtitle = subtitleController.text;
+                                canalList.add(CanalCard(
+                                    title: title, subtitle: subtitle));
+                              });
+                              Navigator.pop(context);
+                            },
                             label: const Text('Valider'),
                             icon: const Icon(Icons.check),
                           )
