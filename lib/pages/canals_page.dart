@@ -68,7 +68,7 @@ class _CanalsPageState extends State<CanalsPage> {
                           ),
                           ElevatedButton.icon(
                             onPressed: () {},
-                            label: const Text('Ajouter'),
+                            label: const Text('Valider'),
                             icon: const Icon(Icons.check),
                           )
                         ],
