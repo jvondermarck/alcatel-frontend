@@ -59,6 +59,7 @@ class _CanalsPageState extends State<CanalsPage> {
                           ),
                           CanalFormField(
                             title: 'Nom',
+                            icon: Icons.title,
                             hint: 'Ex: titre super cool',
                             controller: titleController,
                           ),
@@ -67,6 +68,7 @@ class _CanalsPageState extends State<CanalsPage> {
                           ),
                           CanalFormField(
                             title: 'Description',
+                            icon: Icons.description,
                             hint: 'Ex: description tip top',
                             controller: subtitleController,
                           ),

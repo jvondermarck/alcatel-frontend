@@ -5,10 +5,12 @@ class CanalFormField extends StatefulWidget {
       {super.key,
       required this.title,
       required this.hint,
+      required this.icon,
       required this.controller});
 
   final String title;
   final String hint;
+  final IconData icon;
   final TextEditingController controller;
 
   @override
@@ -25,7 +27,7 @@ class _CanalFormFieldState extends State<CanalFormField> {
           floatingLabelStyle: const TextStyle(fontSize: 19),
           hintText: widget.hint,
           hintStyle: const TextStyle(fontSize: 12),
-          icon: const Icon(Icons.description)),
+          icon: Icon(widget.icon)),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Veuillez remplir ce champ';
