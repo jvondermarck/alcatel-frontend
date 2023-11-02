@@ -33,14 +33,19 @@ class _CanalsPageState extends State<CanalsPage> {
             ),
             body: Container(
               color: Colors.white,
-              child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return CanalCard(
-                      title: 'Canal $index',
-                      subtitle: 'Description du canal $index',
-                    );
-                  }),
+              child: RefreshIndicator(
+                onRefresh: () async {
+                  await Future.delayed(const Duration(seconds: 2));
+                },
+                child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return CanalCard(
+                        title: 'Canal $index',
+                        subtitle: 'Description du canal $index',
+                      );
+                    }),
+              ),
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
