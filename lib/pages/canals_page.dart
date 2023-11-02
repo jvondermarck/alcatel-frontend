@@ -43,21 +43,38 @@ class _CanalsPageState extends State<CanalsPage> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                // Dialog "Recherche de canaux..."
+                // Dialog "Ajout de canaux..."
                 Dialog dialog = Dialog(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
-                  child: const SizedBox(
-                    height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Recherche de canaux...'),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        CircularProgressIndicator(),
-                      ],
+                  child: SizedBox(
+                    height: 250,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        // Faire un forms : Nom du canal + Description du canal
+                        children: <Widget>[
+                          const Text(
+                            'Création du canal',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          canalFormField('Nom', 'Ex: titre super cool'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          canalFormField(
+                              'Description', 'Ex: description tip top'),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ElevatedButton.icon(
+                            onPressed: () {},
+                            label: const Text('Ajouter'),
+                            icon: const Icon(Icons.check),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -65,7 +82,18 @@ class _CanalsPageState extends State<CanalsPage> {
                     context: context,
                     builder: (BuildContext context) => dialog);
               },
-              child: const Icon(Icons.radar_rounded, size: 32),
+              child: const Icon(Icons.add, size: 32),
             )));
+  }
+
+  TextFormField canalFormField(title, hint) {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: title,
+          floatingLabelStyle: const TextStyle(fontSize: 19),
+          hintText: hint,
+          hintStyle: const TextStyle(fontSize: 12),
+          icon: const Icon(Icons.description)),
+    );
   }
 }
