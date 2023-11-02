@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
-import 'package:pushtotalk/components/canal_card.dart';
-import 'package:pushtotalk/components/canal_form_field.dart';
+import 'package:pushtotalk/components/bubble_card.dart';
+import 'package:pushtotalk/components/bubble_form_field.dart';
 
-class CanalsPage extends StatefulWidget {
-  const CanalsPage({Key? key}) : super(key: key);
+class BubblesPage extends StatefulWidget {
+  const BubblesPage({Key? key}) : super(key: key);
 
   @override
-  State<CanalsPage> createState() => _CanalsPageState();
+  State<BubblesPage> createState() => _BubblesPageState();
 }
 
-class _CanalsPageState extends State<CanalsPage> {
-  List<CanalCard> canalList = [];
+class _BubblesPageState extends State<BubblesPage> {
+  List<BubbleCard> bubbleList = [];
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
 
@@ -26,9 +26,9 @@ class _CanalsPageState extends State<CanalsPage> {
         child: Container(
           color: Colors.white,
           child: ListView.builder(
-            itemCount: canalList.length,
+            itemCount: bubbleList.length,
             itemBuilder: (context, index) {
-              return canalList[index];
+              return bubbleList[index];
             },
           ),
         ),
@@ -51,13 +51,13 @@ class _CanalsPageState extends State<CanalsPage> {
                       child: Column(
                         children: <Widget>[
                           const Text(
-                            'Création du canal',
+                            'Création de la bulle',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
-                          CanalFormField(
+                          BubbleFormField(
                             title: 'Nom',
                             icon: Icons.title,
                             hint: 'Ex: titre super cool',
@@ -66,7 +66,7 @@ class _CanalsPageState extends State<CanalsPage> {
                           const SizedBox(
                             height: 10,
                           ),
-                          CanalFormField(
+                          BubbleFormField(
                             title: 'Description',
                             icon: Icons.description,
                             hint: 'Ex: description tip top',
@@ -81,7 +81,7 @@ class _CanalsPageState extends State<CanalsPage> {
                                 if (formKey.currentState!.validate()) {
                                   String title = titleController.text;
                                   String subtitle = subtitleController.text;
-                                  canalList.add(CanalCard(
+                                  bubbleList.add(BubbleCard(
                                     title: title,
                                     subtitle: subtitle,
                                   ));

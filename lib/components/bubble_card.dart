@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/pages/voice_page.dart';
 
-class CanalCard extends StatefulWidget {
+class BubbleCard extends StatefulWidget {
   final String title;
   final String subtitle;
 
-  const CanalCard({super.key, required this.title, required this.subtitle});
+  const BubbleCard({super.key, required this.title, required this.subtitle});
 
   @override
-  State<CanalCard> createState() => _CanalCardState();
+  State<BubbleCard> createState() => _BubbleCardState();
 }
 
-class _CanalCardState extends State<CanalCard> {
+class _BubbleCardState extends State<BubbleCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +29,7 @@ class _CanalCardState extends State<CanalCard> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => VoicePage(canal: widget.title)));
+                        builder: (context) => VoicePage(bubble: widget.title)));
               }),
         ),
       ),

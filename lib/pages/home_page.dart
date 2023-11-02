@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
-import 'package:pushtotalk/pages/canals_page.dart';
+import 'package:pushtotalk/pages/bubbles_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CanalsPage(),
+                    builder: (context) => const BubblesPage(),
                   ),
                 );
               },
