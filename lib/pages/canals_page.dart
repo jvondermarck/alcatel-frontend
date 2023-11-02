@@ -43,7 +43,6 @@ class _CanalsPageState extends State<CanalsPage> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                // Dialog "Ajout de canaux..."
                 Dialog dialog = Dialog(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
@@ -52,7 +51,6 @@ class _CanalsPageState extends State<CanalsPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
-                        // Faire un forms : Nom du canal + Description du canal
                         children: <Widget>[
                           const Text(
                             'Création du canal',
