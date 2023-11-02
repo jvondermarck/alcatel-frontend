@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/pages/voice_page.dart';
 
 class CanalCard extends StatefulWidget {
   final String title;
@@ -22,7 +23,14 @@ class _CanalCardState extends State<CanalCard> {
           leading: const Icon(Icons.person),
           iconColor: Colors.black,
           textColor: Colors.black,
-          trailing: const Icon(Icons.meeting_room_rounded),
+          trailing: GestureDetector(
+              child: const Icon(Icons.meeting_room_rounded),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VoicePage(canal: widget.title)));
+              }),
         ),
       ),
     );
