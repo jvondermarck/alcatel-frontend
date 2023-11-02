@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CanalFormField extends StatefulWidget {
-  const CanalFormField(
+class BubbleFormField extends StatefulWidget {
+  const BubbleFormField(
       {super.key,
       required this.title,
       required this.hint,
@@ -14,10 +14,10 @@ class CanalFormField extends StatefulWidget {
   final TextEditingController controller;
 
   @override
-  State<CanalFormField> createState() => _CanalFormFieldState();
+  State<BubbleFormField> createState() => _BubbleFormFieldState();
 }
 
-class _CanalFormFieldState extends State<CanalFormField> {
+class _BubbleFormFieldState extends State<BubbleFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(

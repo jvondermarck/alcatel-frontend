@@ -3,9 +3,9 @@ import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/utils/colors.dart';
 
 class VoicePage extends StatefulWidget {
-  final String canal;
+  final String bubble;
 
-  const VoicePage({super.key, required this.canal});
+  const VoicePage({super.key, required this.bubble});
 
   @override
   State<VoicePage> createState() => _VoicePageState();
@@ -43,6 +43,6 @@ class _VoicePageState extends State<VoicePage> {
             ],
           )),
         ),
-        title: widget.canal);
+        title: widget.bubble);
   }
 }
