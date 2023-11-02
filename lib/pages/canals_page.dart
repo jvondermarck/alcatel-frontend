@@ -11,13 +11,7 @@ class CanalsPage extends StatefulWidget {
 }
 
 class _CanalsPageState extends State<CanalsPage> {
-  List<CanalCard> canalList = [
-    const CanalCard(title: 'Canal 1', subtitle: 'Description 1'),
-    const CanalCard(title: 'Canal 2', subtitle: 'Description 2'),
-    const CanalCard(title: 'Canal 3', subtitle: 'Description 3'),
-    const CanalCard(title: 'Canal 4', subtitle: 'Description 4'),
-    const CanalCard(title: 'Canal 5', subtitle: 'Description 5'),
-  ];
+  List<CanalCard> canalList = [];
   @override
   Widget build(BuildContext context) {
     TextEditingController titleController = TextEditingController();
