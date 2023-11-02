@@ -81,6 +81,8 @@ class _CanalsPageState extends State<CanalsPage> {
                                 subtitle: subtitle,
                               ));
                             });
+                            titleController.clear();
+                            subtitleController.clear();
                             Navigator.pop(context);
                           },
                           label: const Text('Valider'),
