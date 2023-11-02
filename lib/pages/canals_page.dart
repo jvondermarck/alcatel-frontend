@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/components/canal_card.dart';
 import 'package:pushtotalk/utils/colors.dart';
 
 class CanalsPage extends StatefulWidget {
@@ -11,22 +12,6 @@ class CanalsPage extends StatefulWidget {
 class _CanalsPageState extends State<CanalsPage> {
   @override
   Widget build(BuildContext context) {
-    Widget canalCard(String title, String subtitle) {
-      return Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Card(
-          child: ListTile(
-            title: Text(title),
-            subtitle: Text(subtitle),
-            leading: const Icon(Icons.person),
-            iconColor: Colors.black,
-            textColor: Colors.black,
-            trailing: const Icon(Icons.meeting_room_rounded),
-          ),
-        ),
-      );
-    }
-
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -50,7 +35,10 @@ class _CanalsPageState extends State<CanalsPage> {
               child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return canalCard('Canal $index', 'Description $index');
+                    return CanalCard(
+                      title: 'Canal $index',
+                      subtitle: 'Description du canal $index',
+                    );
                   }),
             ),
             floatingActionButton: FloatingActionButton(
