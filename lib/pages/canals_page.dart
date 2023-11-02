@@ -38,7 +38,7 @@ class _CanalsPageState extends State<CanalsPage> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              final _formKey = GlobalKey<FormState>();
+              final formKey = GlobalKey<FormState>();
               return Dialog(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -47,7 +47,7 @@ class _CanalsPageState extends State<CanalsPage> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Form(
-                      key: _formKey,
+                      key: formKey,
                       child: Column(
                         children: <Widget>[
                           const Text(
@@ -76,7 +76,7 @@ class _CanalsPageState extends State<CanalsPage> {
                           ElevatedButton.icon(
                             onPressed: () {
                               setState(() {
-                                if (_formKey.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   String title = titleController.text;
                                   String subtitle = subtitleController.text;
                                   canalList.add(CanalCard(
