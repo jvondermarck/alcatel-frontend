@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/canal_card.dart';
+import 'package:pushtotalk/components/canal_form_field.dart';
 import 'package:pushtotalk/utils/colors.dart';
 
 class CanalsPage extends StatefulWidget {
@@ -57,12 +58,14 @@ class _CanalsPageState extends State<CanalsPage> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
-                          canalFormField('Nom', 'Ex: titre super cool'),
+                          const CanalFormField(
+                              title: 'Nom', hint: 'Ex: titre super cool'),
                           const SizedBox(
                             height: 10,
                           ),
-                          canalFormField(
-                              'Description', 'Ex: description tip top'),
+                          const CanalFormField(
+                              title: 'Description',
+                              hint: 'Ex: description tip top'),
                           const SizedBox(
                             height: 10,
                           ),
@@ -82,16 +85,5 @@ class _CanalsPageState extends State<CanalsPage> {
               },
               child: const Icon(Icons.add, size: 32),
             )));
-  }
-
-  TextFormField canalFormField(title, hint) {
-    return TextFormField(
-      decoration: InputDecoration(
-          labelText: title,
-          floatingLabelStyle: const TextStyle(fontSize: 19),
-          hintText: hint,
-          hintStyle: const TextStyle(fontSize: 12),
-          icon: const Icon(Icons.description)),
-    );
   }
 }
