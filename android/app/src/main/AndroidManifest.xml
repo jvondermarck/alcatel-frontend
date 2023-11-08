@@ -6,7 +6,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:label">
         <activity
-            android:name=".App"
+            android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

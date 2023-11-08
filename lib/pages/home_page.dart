@@ -3,9 +3,14 @@ import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/pages/bubbles_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
