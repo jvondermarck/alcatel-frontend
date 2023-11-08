@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 class PlatformRepository {
-  static const platform = const MethodChannel('flutter.native/helper');
+  static const platform = MethodChannel('flutter.native/helper');
 
   Future<bool> isRainbowSdkInitialized() async {
     bool result = false;
