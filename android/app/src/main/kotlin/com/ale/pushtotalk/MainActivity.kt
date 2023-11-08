@@ -11,15 +11,8 @@ import org.bouncycastle.pqc.jcajce.provider.Rainbow
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "flutter.native/helper"
 
-    private val applicationID = "c40a10407e6311eeb0c4e7a30078a6db"
-    private val applicationSecret =
-        "NTo25SAvcOKf00TnamieEVWuei5V1HiS9dCtr8sfXPil3MasyQB0B6Q5wLQ9uNOP"
-
     @ExperimentalStdlibApi
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-
-        RainbowSdk.instance().initialize(this.application, applicationID, applicationSecret)
-        RainbowSdk.instance().push().activate(this.application)
 
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
@@ -34,7 +27,8 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun isRainbowSdkInitialized(result: MethodChannel.Result) {
-        Log.d("isRainbowSdkInitialized", RainbowSdk.instance().isInitialized.toString())
-        result.success(RainbowSdk.instance().isInitialized)
+        val appInstance = App.getRainbowSdkInstance()
+        Log.d("RainbowSdk", "isRainbowSdkInitialized: ${appInstance.isInitialized}")
+        result.success(appInstance.isInitialized)
     }
 }
