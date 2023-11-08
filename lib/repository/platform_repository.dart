@@ -3,16 +3,13 @@ import 'package:flutter/services.dart';
 class PlatformRepository {
   static const platform = const MethodChannel('flutter.native/helper');
 
-  Future<String> changeColor(String color) async {
+  Future<bool> isRainbowSdkInitialized() async {
+    bool result = false;
     try {
-      final String result = await platform.invokeMethod("changeColor", {
-        "color": color,
-      });
-      print('RESULT -> $result');
-      color = result;
+      result = await platform.invokeMethod("isRainbowSdkInitialized", {});
     } on PlatformException catch (e) {
-      print('ERROR -> ${e.message}');
+      print("ERROR -> ${e.message}");
     }
-    return color;
+    return result;
   }
 }
