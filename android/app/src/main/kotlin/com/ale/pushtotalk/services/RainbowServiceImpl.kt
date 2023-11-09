@@ -12,12 +12,10 @@ import org.tinylog.Level
 
 class RainbowServiceImpl: RainbowService {
     // c'est pour tester frr no malveillance
-    private val login = "bfabre@cfai-formation.fr"
-    private val password = "Gcp@sX6qKjSgMfe5"
 
-    override fun login() {
+    override fun login(email: String, password: String) {
         RainbowSdk.instance().connection().signin(
-            login,
+            email,
             password,
             "sandbox.openrainbow.com",
             object: SigninResponseListener() {

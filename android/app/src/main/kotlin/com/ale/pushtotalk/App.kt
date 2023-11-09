@@ -17,6 +17,6 @@ class App(private val rainbowService: RainbowService = RainbowServiceImpl()) : F
         rainbowService.initializeSdk(this, applicationID, applicationSecret)
 
         // Just to try if login works properly
-        rainbowService.login()
+        rainbowService.login("example@mail.com", "password")
     }
 }
