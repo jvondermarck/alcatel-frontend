@@ -1,16 +1,17 @@
-package com.ale.pushtotalk
+package com.ale.pushtotalk.services
 
 import android.util.Log
 import com.ale.infra.rest.listeners.RainbowError
 import com.ale.listener.SigninResponseListener
+import com.ale.pushtotalk.App
 import com.ale.rainbowsdk.RainbowSdk
 
 
 class RainbowService {
     private val sdkInstance = App.getRainbowSdkInstance()
     // c'est pour tester frr no malveillance
-    private val login = "gaga"
-    private val password = "gougou"
+    private val login = "bfabre@cfai-formation.fr"
+    private val password = "Gcp@sX6qKjSgMfe5"
 
     fun login() {
         sdkInstance.connection().signin(
@@ -25,7 +26,7 @@ class RainbowService {
                     Log.d("Rainbow - Init connection", "onRequestFailed: $errorCode - $err")
                 }
                 override fun onSigninSucceeded() {
-                    Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${sdkInstance.connection().isConnected}")
+                    Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${sdkInstance.connection().isSignedIn}")
                 }
 
             })

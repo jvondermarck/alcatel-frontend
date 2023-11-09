@@ -1,6 +1,7 @@
 package com.ale.pushtotalk
 
 import android.util.Log
+import com.ale.pushtotalk.services.RainbowService
 import com.ale.rainbow.RBLog
 import com.ale.rainbowsdk.RainbowSdk
 import io.flutter.app.FlutterApplication
