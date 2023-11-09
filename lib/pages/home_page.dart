@@ -54,7 +54,15 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   isConnected = result;
                 });
-                // TODO - build BubblesPage
+                // TODO - enhance (see dart tips and avoid context in async function)
+                if (isConnected) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const BubblesPage(),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
