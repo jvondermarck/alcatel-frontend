@@ -11,7 +11,8 @@ import org.tinylog.Level
 
 
 class RainbowServiceImpl: RainbowService {
-    // c'est pour tester frr no malveillance
+
+    private var isConnected: Boolean = false
 
     override fun login(email: String, password: String) {
         RainbowSdk.instance().connection().signin(
@@ -24,9 +25,11 @@ class RainbowServiceImpl: RainbowService {
                     err: RainbowError<Unit>
                 ) {
                     Log.d("Rainbow - Init connection", "onRequestFailed: $errorCode - $err")
+                    isConnected = false
                 }
                 override fun onSigninSucceeded() {
                     Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${RainbowSdk.instance().connection().isSignedIn}")
+                    isConnected = true
                 }
 
             })
@@ -41,5 +44,10 @@ class RainbowServiceImpl: RainbowService {
 
     override fun isSdkInitialized(): Boolean {
         return RainbowSdk.instance().isInitialized
+    }
+
+    override fun isSignedIn(): Boolean {
+        // TODO - (refactor) make it the right way with instance
+        return isConnected
     }
 }
