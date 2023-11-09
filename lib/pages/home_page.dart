@@ -15,6 +15,10 @@ class _HomePageState extends State<HomePage> {
   static final PlatformRepository platformRepository = PlatformRepository();
   String title = "Push To Talk";
   bool isRainbowSdkInitialized = false;
+  bool isConnected = false;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +38,23 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 40,
             ),
-            const CustomTextField(label: 'Email', hidden: false),
-            const CustomTextField(label: 'Mot de passe', hidden: true),
+            CustomTextField(
+                label: 'Email', hidden: false, controller: emailController),
+            CustomTextField(
+                label: 'Mot de passe',
+                hidden: true,
+                controller: passwordController),
             const SizedBox(
               height: 40,
             ),
             ElevatedButton(
-              // TODO - call repository function to login
               onPressed: () async {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const BubblesPage(),
-                  ),
-                );
+                bool result = await platformRepository.login(
+                    emailController.text, passwordController.text);
+                setState(() {
+                  isConnected = result;
+                });
+                // TODO - build BubblesPage
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
@@ -65,12 +72,6 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   isRainbowSdkInitialized = result;
                 });
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const BubblesPage(),
-                //   ),
-                // );
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black,
