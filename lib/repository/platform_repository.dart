@@ -12,4 +12,5 @@ class PlatformRepository {
     }
     return result;
   }
+  // TODO - add login function to communicate with Kotlin
 }

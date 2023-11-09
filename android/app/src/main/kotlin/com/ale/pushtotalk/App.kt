@@ -8,17 +8,7 @@ import org.tinylog.Level
 
 
 class App : FlutterApplication() {
-    private val applicationID = "6ec7a6107e7711eeb0c4e7a30078a6db"
-    private val applicationSecret =
-        "dqZCG1tONopzjXnU8MHRol1dkBbtwJebdoB73gZTwLWBbwhngWCRMZwtENeBdvrf"
-
-    override fun onCreate() {
-        super.onCreate()
-        RainbowSdk.instance().initialize(this, applicationID, applicationSecret);
-        RBLog.setLevel(Level.WARN);
-        Log.d("RainbowSdk", "onCreate: ${RainbowSdk.instance().isInitialized}");
-        RainbowSdk.instance().push().activate(this);
-    }
+    private val rainbowService = RainbowService()
     companion object {
 
         fun getRainbowSdkInstance(): RainbowSdk {
@@ -26,4 +16,17 @@ class App : FlutterApplication() {
         }
     }
 
+    private val applicationID = "c40a10407e6311eeb0c4e7a30078a6db"
+    private val applicationSecret =
+        "NTo25SAvcOKf00TnamieEVWuei5V1HiS9dCtr8sfXPil3MasyQB0B6Q5wLQ9uNOP"
+
+    override fun onCreate() {
+        super.onCreate()
+        RainbowSdk.instance().initialize(this, applicationID, applicationSecret);
+        RBLog.setLevel(Level.WARN);
+        Log.d("RainbowSdk", "onCreate: ${getRainbowSdkInstance()}");
+        RainbowSdk.instance().push().activate(this);
+        // just to try if login works properly
+        rainbowService.login()
+    }
 }

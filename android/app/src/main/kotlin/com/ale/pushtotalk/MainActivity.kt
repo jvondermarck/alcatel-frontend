@@ -2,14 +2,16 @@ package com.ale.pushtotalk
 
 import android.util.Log
 import androidx.annotation.NonNull
-import com.ale.rainbowsdk.RainbowSdk
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-import org.bouncycastle.pqc.jcajce.provider.Rainbow
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "flutter.native/helper"
+    private val sdkInstance = App.getRainbowSdkInstance()
+    // to access rainbowService method (should be modified with an interface)
+    private val rainbowService = RainbowService()
+
 
     @ExperimentalStdlibApi
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
@@ -22,13 +24,22 @@ class MainActivity : FlutterActivity() {
                 call.method.equals("isRainbowSdkInitialized") -> {
                     isRainbowSdkInitialized(result)
                 }
+                // TODO - adapt this call (it should maybe be modified)
+                call.method.equals("login") -> {
+                    login(result)
+                }
             }
         }
     }
 
     private fun isRainbowSdkInitialized(result: MethodChannel.Result) {
-        val appInstance = App.getRainbowSdkInstance()
-        Log.d("RainbowSdk", "isRainbowSdkInitialized: ${appInstance.isInitialized}")
-        result.success(appInstance.isInitialized)
+        Log.d("RainbowSdk", "isRainbowSdkInitialized: $sdkInstance")
+        result.success(sdkInstance.isInitialized)
     }
+
+    private fun login(result: MethodChannel.Result) {
+        // TODO - to adapt -> return true if connected maybe ?
+        // result.success()
+    }
+
 }
