@@ -43,5 +43,6 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
     private fun login(call: MethodCall, result: MethodChannel.Result) {
         // TODO - to adapt -> return true if connected maybe ?
         // result.success()
+        rainbowService.login(call.argument<String>("email")!!, call.argument<String>("password")!!)
     }
 }
