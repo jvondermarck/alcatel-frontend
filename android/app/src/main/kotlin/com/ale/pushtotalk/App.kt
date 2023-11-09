@@ -1,33 +1,22 @@
 package com.ale.pushtotalk
 
-import android.util.Log
-import com.ale.pushtotalk.services.RainbowService
-import com.ale.rainbow.RBLog
-import com.ale.rainbowsdk.RainbowSdk
+import com.ale.pushtotalk.interfaces.RainbowService
+import com.ale.pushtotalk.services.RainbowServiceImpl
 import io.flutter.app.FlutterApplication
-import org.tinylog.Level
 
 
-class App : FlutterApplication() {
-    private val rainbowService = RainbowService()
-    companion object {
+class App(private val rainbowService: RainbowService = RainbowServiceImpl()) : FlutterApplication() {
 
-        fun getRainbowSdkInstance(): RainbowSdk {
-            return RainbowSdk.instance();
-        }
-    }
-
+    // TODO - Hide ID/Secret (config file)
     private val applicationID = "c40a10407e6311eeb0c4e7a30078a6db"
     private val applicationSecret =
         "NTo25SAvcOKf00TnamieEVWuei5V1HiS9dCtr8sfXPil3MasyQB0B6Q5wLQ9uNOP"
 
     override fun onCreate() {
         super.onCreate()
-        RainbowSdk.instance().initialize(this, applicationID, applicationSecret);
-        RBLog.setLevel(Level.WARN);
-        Log.d("RainbowSdk", "onCreate: ${getRainbowSdkInstance()}");
-        RainbowSdk.instance().push().activate(this);
-        // just to try if login works properly
+        rainbowService.initializeSdk(this, applicationID, applicationSecret)
+
+        // Just to try if login works properly
         rainbowService.login()
     }
 }
