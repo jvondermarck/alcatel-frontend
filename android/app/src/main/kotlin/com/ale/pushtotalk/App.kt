@@ -15,8 +15,5 @@ class App(private val rainbowService: RainbowService = RainbowServiceImpl()) : F
     override fun onCreate() {
         super.onCreate()
         rainbowService.initializeSdk(this, applicationID, applicationSecret)
-
-        // Just to try if login works properly
-        rainbowService.login("example@mail.com", "password")
     }
 }
