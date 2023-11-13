@@ -54,9 +54,9 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   isConnected = result;
                 });
-                // TODO - enhance (see dart tips and avoid context in async function)
                 if (isConnected) {
-                  Navigator.push(
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const BubblesPage(),
