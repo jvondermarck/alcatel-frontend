@@ -2,8 +2,11 @@ package com.ale.pushtotalk
 
 import android.util.Log
 import androidx.annotation.NonNull
+import com.ale.infra.rest.listeners.RainbowError
+import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.pushtotalk.services.RainbowServiceImpl
+import com.ale.rainbowsdk.RainbowSdk
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
@@ -41,8 +44,18 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
     }
 
     private fun login(call: MethodCall, result: MethodChannel.Result) {
-        rainbowService.login(call.argument<String>("email")!!, call.argument<String>("password")!!)
-        Log.d("RainbowSdk", "isSignedIn: ${rainbowService.isSignedIn()}")
-        result.success(rainbowService.isSignedIn())
+        rainbowService.login(call.argument<String>("email")!!, call.argument<String>("password")!!,
+            object : LoginCallback {
+                override fun onLoginSuccess() {
+                    Log.d("RainbowSdk", "isSignedIn: ${rainbowService.isSignedIn()}")
+                    result.success(rainbowService.isSignedIn())
+                }
+
+                override fun onLoginError(errorCode: RainbowSdk.ErrorCode, error: RainbowError<Unit>) {
+                    // Gérer les erreurs de connexion si nécessaire
+                    result.error("LOGIN_FAILED", "Login failed", null)
+                }
+            }
+        )
     }
 }

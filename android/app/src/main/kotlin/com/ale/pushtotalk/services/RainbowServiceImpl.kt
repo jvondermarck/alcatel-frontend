@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.ale.infra.rest.listeners.RainbowError
 import com.ale.listener.SigninResponseListener
+import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.rainbow.RBLog
 import com.ale.rainbowsdk.RainbowSdk
@@ -14,26 +15,29 @@ class RainbowServiceImpl: RainbowService {
 
     private var isConnected: Boolean = false
 
-    override fun login(email: String, password: String) {
-        RainbowSdk.instance().connection().signin(
-            email,
-            password,
-            "sandbox.openrainbow.com",
-            object: SigninResponseListener() {
-                override fun onRequestFailed(
-                    errorCode: RainbowSdk.ErrorCode,
-                    err: RainbowError<Unit>
-                ) {
-                    Log.d("Rainbow - Init connection", "onRequestFailed: $errorCode - $err")
-                    isConnected = false
-                }
-                override fun onSigninSucceeded() {
-                    Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${RainbowSdk.instance().connection().isSignedIn}")
-                    isConnected = true
-                }
+    override fun login(email: String, password: String, callback: LoginCallback) {
+    RainbowSdk.instance().connection().signin(
+        email,
+        password,
+        "sandbox.openrainbow.com",
+        object : SigninResponseListener() {
+            override fun onRequestFailed(
+                errorCode: RainbowSdk.ErrorCode,
+                err: RainbowError<Unit>
+            ) {
+                Log.d("Rainbow - Init connection", "onRequestFailed: $errorCode - $err")
+                isConnected = false
+                callback.onLoginError(errorCode, err)
+            }
 
-            })
-    }
+            override fun onSigninSucceeded() {
+                Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${RainbowSdk.instance().connection().isSignedIn}")
+                isConnected = true
+                callback.onLoginSuccess()
+            }
+        })
+}
+
 
     override fun initializeSdk(app: Application, applicationID: String, applicationSecret: String) {
         RainbowSdk.instance().initialize(app, applicationID, applicationSecret)
