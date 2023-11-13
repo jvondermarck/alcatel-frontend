@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class PlatformRepository {
@@ -8,11 +9,10 @@ class PlatformRepository {
     try {
       result = await platform.invokeMethod("isRainbowSdkInitialized", {});
     } on PlatformException catch (e) {
-      print("ERROR -> ${e.message}");
+      debugPrint("ERROR -> ${e.message}");
     }
     return result;
   }
-  // TODO - add login function to communicate with Kotlin
 
   Future<bool> login(String email, String password) async {
     bool result = false;
@@ -22,7 +22,7 @@ class PlatformRepository {
         "password": password,
       });
     } on PlatformException catch (e) {
-      print("ERROR -> ${e.message}");
+      debugPrint("ERROR -> ${e.message}");
     }
     return result;
   }
