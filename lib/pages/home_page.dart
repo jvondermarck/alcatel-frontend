@@ -73,23 +73,6 @@ class _HomePageState extends State<HomePage> {
               ),
               child: const Text('Se connecter'),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                bool result =
-                    await platformRepository.isRainbowSdkInitialized();
-                setState(() {
-                  isRainbowSdkInitialized = result;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text('c init ouuuuuuuuuuuuuuuuuuuu'),
-            ),
           ],
         ),
       ),
