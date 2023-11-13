@@ -8,6 +8,7 @@ import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.rainbow.RBLog
 import com.ale.rainbowsdk.RainbowSdk
+import io.flutter.plugin.common.MethodChannel
 import org.tinylog.Level
 
 
@@ -15,7 +16,7 @@ class RainbowServiceImpl: RainbowService {
 
     private var isConnected: Boolean = false
 
-    override fun login(email: String, password: String, callback: LoginCallback) {
+    override fun login(email: String, password: String, callback: LoginCallback, result: MethodChannel.Result) {
     RainbowSdk.instance().connection().signin(
         email,
         password,
@@ -27,13 +28,13 @@ class RainbowServiceImpl: RainbowService {
             ) {
                 Log.d("Rainbow - Init connection", "onRequestFailed: $errorCode - $err")
                 isConnected = false
-                callback.onLoginError(errorCode, err)
+                callback.onLoginError(errorCode, err, result)
             }
 
             override fun onSigninSucceeded() {
                 Log.d("Rainbow - Init connection", "onSigninSucceeded: Connected - ${RainbowSdk.instance().connection().isSignedIn}")
                 isConnected = true
-                callback.onLoginSuccess()
+                callback.onLoginSuccess(this@RainbowServiceImpl, result)
             }
         })
 }
