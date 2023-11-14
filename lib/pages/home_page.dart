@@ -70,13 +70,17 @@ class _HomePageState extends State<HomePage> {
                 }
               },
               style: ElevatedButton.styleFrom(
+                fixedSize: const Size(150, 50),
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(5),
                 ),
               ),
-              child: const Text('Se connecter'),
+              child: const Text('Se connecter', style: TextStyle(fontSize: 15)),
+            ),
+            const SizedBox(
+              height: 80,
             ),
           ],
         ),
