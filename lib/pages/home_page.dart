@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/pages/bubbles_page.dart';
 import 'package:pushtotalk/repository/platform_repository.dart';
+import 'package:pushtotalk/utils/custom_snackbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,13 +58,15 @@ class _HomePageState extends State<HomePage> {
                   isConnected = result;
                 });
                 if (isConnected) {
-                  // ignore: use_build_context_synchronously
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const BubblesPage(),
                     ),
                   );
+                } else {
+                  CustomSnackbar.showSnackbar(context, "La connexion a échoué",
+                      Colors.red, Colors.white);
                 }
               },
               style: ElevatedButton.styleFrom(
