@@ -21,7 +21,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Column(
       children: [
         SizedBox(
-            width: 250,
+            width: 300,
             child: TextField(
                 controller: widget.controller,
                 cursorColor: Colors.white,
@@ -40,7 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       borderSide: BorderSide(width: 2, color: Colors.white)),
                 ))),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
       ],
     );
