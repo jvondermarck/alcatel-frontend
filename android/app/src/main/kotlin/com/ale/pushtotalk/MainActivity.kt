@@ -21,6 +21,11 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
         private const val CHANNEL = "flutter.native/helper"
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        rainbowService.logout()
+    }
+
     @ExperimentalStdlibApi
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         // TODO - (refactor) move this inside a router

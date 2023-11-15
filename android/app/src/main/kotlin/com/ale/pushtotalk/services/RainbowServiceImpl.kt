@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.ale.infra.rest.listeners.RainbowError
 import com.ale.listener.SigninResponseListener
+import com.ale.listener.SignoutResponseListener
 import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.rainbow.RBLog
@@ -38,6 +39,15 @@ class RainbowServiceImpl: RainbowService {
             }
         })
 }
+
+    override fun logout() {
+        RainbowSdk.instance().connection().signout(object : SignoutResponseListener() {
+            override fun onSignoutSucceeded() {
+                isConnected = false
+                Log.d("Rainbow - Init connection", "onSignoutSucceeded: Disconnected - ${RainbowSdk.instance().connection().isSignedIn}")
+            }
+        })
+    }
 
 
     override fun initializeSdk(app: Application, applicationID: String, applicationSecret: String) {
