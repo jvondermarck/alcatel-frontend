@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:pushtotalk/components/bubble_form_field.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class BubblesPage extends StatefulWidget {
   const BubblesPage({Key? key}) : super(key: key);
@@ -14,14 +17,52 @@ class _BubblesPageState extends State<BubblesPage> {
   List<BubbleCard> bubbleList = [];
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
+  FlutterBluePlus flutterBluePlus = FlutterBluePlus();
+  @override
+  void initState() {
+    FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
+    enableBLE();
+    super.initState();
+  }
+  enableBLE() async {
+    // check if BLE is supported
+    if (await FlutterBluePlus.isSupported == false) {
+      print("BLE is not supported by this device!");
+      return;
+    }
+
+    // turn on bluetooth ourself if we can
+    // for iOS, the user controls bluetooth enable/disable
+    if (Platform.isAndroid) {
+      await FlutterBluePlus.turnOn();
+    }
+
+    // wait bluetooth to be on
+    // note: for iOS the initial state is typically BluetoothAdapterState.unknown
+    await FlutterBluePlus.adapterState
+        .where((s) => s == BluetoothAdapterState.on)
+        .first;
+  }
+//-----------------------------Start the Scan-----------------------------
+  startScan() async {
+    FlutterBluePlus.startScan(
+        timeout: const Duration(seconds: 4)); //Starts Scanning for Devices
+  }
+//-----------------------------Stop the Scan-----------------------------
+
+  stopScan() {
+    FlutterBluePlus.stopScan(); //Stop Scanning for Devices
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
       title: 'Liste des canaux',
       body: RefreshIndicator(
-        onRefresh: () async {
-          await Future.delayed(const Duration(seconds: 2));
+        onRefresh: () {
+          return FlutterBluePlus.startScan(
+              timeout:
+                  const Duration(seconds: 4)); //Starts Scanning for Devices
         },
         child: Container(
           color: Colors.white,
