@@ -2,14 +2,13 @@ package com.ale.pushtotalk
 
 import android.util.Log
 import androidx.annotation.NonNull
-import com.ale.infra.rest.listeners.RainbowError
 import com.ale.pushtotalk.callback.LoginCallbackImpl
 import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.pushtotalk.services.RainbowServiceImpl
-import com.ale.rainbowsdk.RainbowSdk
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.embedding.engine.plugins.util.GeneratedPluginRegister
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
@@ -28,6 +27,7 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
 
     @ExperimentalStdlibApi
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+        GeneratedPluginRegister.registerGeneratedPlugins(flutterEngine)
         // TODO - (refactor) move this inside a router
         MethodChannel(
             flutterEngine.dartExecutor.binaryMessenger,
