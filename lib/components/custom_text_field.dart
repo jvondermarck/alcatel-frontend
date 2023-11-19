@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   final String label;
   final bool hidden;
+  final TextEditingController controller;
 
-  const CustomTextField({super.key, required this.label, required this.hidden});
+  const CustomTextField(
+      {super.key,
+      required this.label,
+      required this.hidden,
+      required this.controller});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -16,8 +21,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Column(
       children: [
         SizedBox(
-            width: 250,
+            width: 300,
             child: TextField(
+                controller: widget.controller,
                 cursorColor: Colors.white,
                 cursorHeight: 20,
                 cursorWidth: 1,
@@ -34,7 +40,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       borderSide: BorderSide(width: 2, color: Colors.white)),
                 ))),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
       ],
     );
