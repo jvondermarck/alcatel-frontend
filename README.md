@@ -62,10 +62,13 @@ Afin de permettre la communication entre Flutter/Dart et le SDK Rainbow. Un "pon
 ### Développement
 
 Il est recommandé d'utiliser VS Code avec les plugins suscités pour la partie Dart/Flutter (fichiers dans **lib/**)
+
 ![Dart structure](docs/images/dart_structure.png)
+
 _Point d'entrée : **main.dart**_
 
 Il est recommandé d'utiliser Android Studio pour la partie Kotlin afin d'avoir une aide syntaxique (fichiers dans **android/**). Pensez d'ailleurs à uniquement ouvrir la partie **android** de l'application dans Android Studio
+
 ![Kotlin structure](docs/images/kotlin_structure.png)
 
 ### Hot Reload
@@ -87,5 +90,7 @@ Le frontend utilise un fichier `env` comportant un ApplicationID et un Applicati
 ## Liens utiles
 
 [Documentation Flutter](https://docs.flutter.dev/)
+
 [rainbowSdk](https://developers.openrainbow.com/doc/sdk/android/lts/modules/android_sdk/com.ale.rainbowsdk/index.html)
+
 [Platform Channels](https://docs.flutter.dev/platform-integration/platform-channels?tab=android-channel-java-tab) (Pont de liaison)
