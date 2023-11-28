@@ -1,6 +1,7 @@
 package com.ale.pushtotalk.interfaces
 
 import android.app.Application
+import com.ale.infra.contact.IRainbowContact
 import io.flutter.plugin.common.MethodChannel
 
 
@@ -10,4 +11,5 @@ interface RainbowService {
     fun initializeSdk(app: Application, applicationID: String, applicationSecret: String)
     fun isSdkInitialized(): Boolean
     fun isSignedIn(): Boolean
+    fun getRainbowUser(): IRainbowContact
 }

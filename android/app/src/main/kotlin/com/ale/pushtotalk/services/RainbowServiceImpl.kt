@@ -2,6 +2,7 @@ package com.ale.pushtotalk.services
 
 import android.app.Application
 import android.util.Log
+import com.ale.infra.contact.IRainbowContact
 import com.ale.infra.rest.listeners.RainbowError
 import com.ale.listener.SigninResponseListener
 import com.ale.listener.SignoutResponseListener
@@ -64,5 +65,9 @@ class RainbowServiceImpl: RainbowService {
     override fun isSignedIn(): Boolean {
         // TODO - (refactor) make it the right way with instance
         return isConnected
+    }
+
+    override fun getRainbowUser(): IRainbowContact {
+        return RainbowSdk.instance().myProfile().getConnectedUser()
     }
 }
