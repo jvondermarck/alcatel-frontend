@@ -88,13 +88,13 @@ class _BubblesPageState extends State<BubblesPage> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Column(
+                                  const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.location_on),
                                     ],
                                   ),
-                                  SizedBox(width: 15),
+                                  const SizedBox(width: 15),
                                   Expanded(
                                     child: Column(
                                       mainAxisAlignment:
@@ -106,7 +106,7 @@ class _BubblesPageState extends State<BubblesPage> {
                                           children: [
                                             Text(
                                               'Long: $longitude',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 12,
                                               ),
@@ -117,7 +117,7 @@ class _BubblesPageState extends State<BubblesPage> {
                                           children: [
                                             Text(
                                               'Lat: $latitude',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 12,
                                               ),
@@ -127,7 +127,7 @@ class _BubblesPageState extends State<BubblesPage> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(width: 15),
+                                  const SizedBox(width: 15),
                                   ElevatedButton.icon(
                                     onPressed: () async {
                                       Position position =
