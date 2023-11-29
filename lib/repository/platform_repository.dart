@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:pushtotalk/class/rainbow_user.dart';
 
 class PlatformRepository {
   static const platform = MethodChannel('flutter.native/helper');
@@ -35,5 +36,15 @@ class PlatformRepository {
       debugPrint("ERROR -> ${e.message}");
     }
     return result;
+  }
+
+  Future<RainbowUser> getRainbowUser() async {
+    Map<Object?, Object?> result = {};
+    try {
+      result = await platform.invokeMethod("getRainbowUser", {});
+    } on PlatformException catch (e) {
+      debugPrint("ERROR -> ${e.message}");
+    }
+    return RainbowUser.fromMap(result);
   }
 }

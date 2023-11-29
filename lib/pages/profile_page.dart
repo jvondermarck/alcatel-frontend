@@ -25,10 +25,15 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
-                radius: 80,
-                backgroundColor: Colors.white,
-                // backgroundImage: AssetImage('assets/images/avatar.png'),
+              GestureDetector(
+                onTap: () async {
+                  // var rainbowUser = await platformRepository.getRainbowUser();
+                },
+                child: const CircleAvatar(
+                  radius: 80,
+                  backgroundColor: Colors.white,
+                  // backgroundImage: AssetImage('assets/images/avatar.png'),
+                ),
               ),
               const SizedBox(height: 30),
               const Text(
