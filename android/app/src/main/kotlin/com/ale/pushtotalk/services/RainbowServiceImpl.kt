@@ -2,7 +2,6 @@ package com.ale.pushtotalk.services
 
 import android.app.Application
 import android.util.Log
-import com.ale.infra.contact.IRainbowContact
 import com.ale.infra.rest.listeners.RainbowError
 import com.ale.listener.SigninResponseListener
 import com.ale.listener.SignoutResponseListener
@@ -67,7 +66,15 @@ class RainbowServiceImpl: RainbowService {
         return isConnected
     }
 
-    override fun getRainbowUser(): IRainbowContact {
-        return RainbowSdk.instance().myProfile().getConnectedUser()
+    override fun getRainbowUser(): Map<String, String?> {
+        val user = RainbowSdk.instance().myProfile().getConnectedUser()
+
+        return mapOf(
+            "id" to user?.id,
+            "firstName" to user?.firstName,
+            "lastName" to user?.lastName,
+            "companyName" to user?.companyName,
+            "email" to user?.getMainEmailAddress()
+        )
     }
 }

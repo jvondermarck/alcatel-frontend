@@ -11,5 +11,5 @@ interface RainbowService {
     fun initializeSdk(app: Application, applicationID: String, applicationSecret: String)
     fun isSdkInitialized(): Boolean
     fun isSignedIn(): Boolean
-    fun getRainbowUser(): IRainbowContact
+    fun getRainbowUser(): Map<String, String?>
 }
