@@ -4,6 +4,7 @@ class RainbowUser {
   final String lastName;
   final String companyName;
   final String email;
+  final String? jobTitle;
 
   RainbowUser({
     required this.id,
@@ -11,6 +12,7 @@ class RainbowUser {
     required this.lastName,
     required this.companyName,
     required this.email,
+    required this.jobTitle,
   });
 
   factory RainbowUser.fromJson(Map<String, dynamic> json) {
@@ -20,6 +22,7 @@ class RainbowUser {
       lastName: json['lastName'],
       companyName: json['company'],
       email: json['email'],
+      jobTitle: json['jobTitle'],
     );
   }
 
@@ -30,6 +33,7 @@ class RainbowUser {
       lastName: map['lastName'].toString(),
       companyName: map['companyName'].toString(),
       email: map['email'].toString(),
+      jobTitle: map['jobTitle'].toString(),
     );
   }
 }

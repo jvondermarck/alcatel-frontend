@@ -74,7 +74,8 @@ class RainbowServiceImpl: RainbowService {
             "firstName" to user?.firstName,
             "lastName" to user?.lastName,
             "companyName" to user?.companyName,
-            "email" to user?.getMainEmailAddress()
+            "email" to user?.getMainEmailAddress(),
+            "jobTitle" to user?.jobTitle,
         )
     }
 }

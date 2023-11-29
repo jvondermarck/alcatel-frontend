@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/class/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/pages/home_page.dart';
 import 'package:pushtotalk/repository/platform_repository.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final RainbowUser user;
+  const ProfilePage({super.key, required this.user});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -25,63 +27,43 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () async {
-                  // var rainbowUser = await platformRepository.getRainbowUser();
-                },
-                child: const CircleAvatar(
-                  radius: 80,
-                  backgroundColor: Colors.white,
-                  // backgroundImage: AssetImage('assets/images/avatar.png'),
-                ),
+              const CircleAvatar(
+                radius: 80,
+                backgroundColor: Colors.white,
+                // backgroundImage: AssetImage('assets/images/avatar.png'),
               ),
               const SizedBox(height: 30),
-              const Text(
-                'Joe Golem',
-                style: TextStyle(
+              Text(
+                '${widget.user.firstName} ${widget.user.lastName}',
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               const SizedBox(height: 5),
-              const Text(
-                'joe.golem@gmail.com',
-                style: TextStyle(
+              Text(
+                widget.user.email,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Développeur',
-                style: TextStyle(
+              Text(
+                widget.user.jobTitle == 'null'
+                    ? 'Travaille à'
+                    : widget.user.jobTitle!,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               const SizedBox(height: 5),
-              const Text(
-                'UIMM Alsace',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white70,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Contact',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 5),
-              const Text(
-                '+33 6 12 34 56 78',
-                style: TextStyle(
+              Text(
+                widget.user.companyName,
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white70,
                 ),
