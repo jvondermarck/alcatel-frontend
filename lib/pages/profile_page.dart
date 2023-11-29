@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
+import 'package:pushtotalk/pages/home_page.dart';
+import 'package:pushtotalk/repository/platform_repository.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -9,6 +11,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  static final PlatformRepository platformRepository = PlatformRepository();
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -81,6 +85,14 @@ class _ProfilePageState extends State<ProfilePage> {
               ElevatedButton(
                 onPressed: () {
                   debugPrint('Déconnexion');
+                  platformRepository.logout();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                    (route) => false,
+                  );
                 },
                 child: const Text(
                   'Déconnexion',

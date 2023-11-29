@@ -26,4 +26,14 @@ class PlatformRepository {
     }
     return result;
   }
+
+  Future<bool> logout() async {
+    bool result = false;
+    try {
+      result = await platform.invokeMethod("logout", {});
+    } on PlatformException catch (e) {
+      debugPrint("ERROR -> ${e.message}");
+    }
+    return result;
+  }
 }
