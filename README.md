@@ -1,4 +1,4 @@
-## PushToTalk - Frontend
+## PushToTalk - Frontend  
 
 Frontend de l'application PTT pour Rainbow (Alcatel-Lucent Enterprise)
 
