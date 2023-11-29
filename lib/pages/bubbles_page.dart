@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/class/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:pushtotalk/components/bubble_form_field.dart';
 import 'package:pushtotalk/pages/profile_page.dart';
 
 class BubblesPage extends StatefulWidget {
-  const BubblesPage({Key? key}) : super(key: key);
+  final RainbowUser user;
+  const BubblesPage({Key? key, required this.user}) : super(key: key);
 
   @override
   State<BubblesPage> createState() => _BubblesPageState();
@@ -25,7 +27,7 @@ class _BubblesPageState extends State<BubblesPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ProfilePage(),
+                builder: (context) => ProfilePage(user: widget.user),
               ),
             );
           },
