@@ -28,65 +28,69 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              title.toUpperCase(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 42,
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            CustomTextField(
-                label: 'Email', hidden: false, controller: emailController),
-            CustomTextField(
-                label: 'Mot de passe',
-                hidden: true,
-                controller: passwordController),
-            const SizedBox(
-              height: 40,
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                bool result = await platformRepository.login(
-                    emailController.text, passwordController.text);
-                setState(() {
-                  isConnected = result;
-                });
-                if (isConnected) {
-                  RainbowUser user = await platformRepository.getRainbowUser();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BubblesPage(
-                        user: user,
-                      ),
-                    ),
-                  );
-                } else {
-                  CustomSnackbar.showSnackbar(context, "La connexion a échoué",
-                      Colors.red, Colors.white);
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(150, 50),
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                title.toUpperCase(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 42,
                 ),
               ),
-              child: const Text('Se connecter', style: TextStyle(fontSize: 15)),
-            ),
-            const SizedBox(
-              height: 80,
-            ),
-          ],
+              const SizedBox(
+                height: 40,
+              ),
+              CustomTextField(
+                  label: 'Email', hidden: false, controller: emailController),
+              CustomTextField(
+                  label: 'Mot de passe',
+                  hidden: true,
+                  controller: passwordController),
+              const SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  bool result = await platformRepository.login(
+                      emailController.text, passwordController.text);
+                  setState(() {
+                    isConnected = result;
+                  });
+                  if (isConnected) {
+                    RainbowUser user =
+                        await platformRepository.getRainbowUser();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BubblesPage(
+                          user: user,
+                        ),
+                      ),
+                    );
+                  } else {
+                    CustomSnackbar.showSnackbar(context,
+                        "La connexion a échoué", Colors.red, Colors.white);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(150, 50),
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child:
+                    const Text('Se connecter', style: TextStyle(fontSize: 15)),
+              ),
+              const SizedBox(
+                height: 80,
+              ),
+            ],
+          ),
         ),
       ),
     );
