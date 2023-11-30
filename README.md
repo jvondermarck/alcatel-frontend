@@ -3,10 +3,22 @@
 Frontend de l'application PTT pour Rainbow (Alcatel-Lucent Enterprise)
 
 ## Etat actuel du frontend
+> Terminé
 
 - Possibilité de se connecter à l'application avec ses identifiants rainbow
 - Possibilité de consulter son profil et se déconnecter
 - Possibilité de remplir un formulaire de création de bulle avec ses coordonnées GPS
+
+> TBD
+
+- Création des bulles Rainbow en récupérant les informations du formulaire de création de bulle
+- Création des bulles dans la BDD en récupérant les informations du formulaire de création de bulle (après création dans Rainbow) / en récupérant la bulle créée dans Rainbow + latitude + longitude + informations Bluetooth 
+- Modification, suppression des bulles dans Rainbow puis dans la BDD (seulement le créateur de la bulle peut agir sur ses bulles)
+- Affichage des bonnes bulles dans l'UI en fonction de la position de l'utilisateur (comparaison entre la position de l'utilisateur (fonction d'actualisation de la position de l'utisateur en temps réel) et les positions des bulles dans la BDD)
+- Bluetooth ?
+- Veillez à la cohérance des données entre la BDD et Rainbow (les mêmes bulles doivent être présentes au deux endroits => fonction de check pour vérifier cela périodiquement)
+- Connexion automatique à la bulle la plus proche
+- Implémenter la communication vocale (WebRTC)
 
 ## Concept
 
