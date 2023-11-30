@@ -2,6 +2,12 @@
 
 Frontend de l'application PTT pour Rainbow (Alcatel-Lucent Enterprise)
 
+## Etat actuel du frontend
+
+- Possibilité de se connecter à l'application avec ses identifiants rainbow
+- Possibilité de consulter son profil et se déconnecter
+- Possibilité de remplir un formulaire de création de bulle avec ses coordonnées GPS
+
 ## Concept
 
 - Associer la localisation d'une personne avec des canaux vocaux
