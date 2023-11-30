@@ -41,6 +41,12 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
                 call.method.equals("login") -> {
                     login(call, result)
                 }
+                call.method.equals("logout") -> {
+                    logout(call, result)
+                }
+                call.method.equals("getRainbowUser") -> {
+                    getRainbowUser(call, result)
+                }
             }
         }
     }
@@ -54,5 +60,13 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
         rainbowService.login(call.argument<String>("email")!!, call.argument<String>("password")!!,
             loginCallback, result
         )
+    }
+
+    private fun logout(call: MethodCall, result: MethodChannel.Result) {
+        rainbowService.logout()
+    }
+
+    private fun getRainbowUser(call: MethodCall, result: MethodChannel.Result) {
+        result.success(rainbowService.getRainbowUser());
     }
 }
