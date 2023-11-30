@@ -22,8 +22,10 @@ class _BubblesPageState extends State<BubblesPage> {
   void initState() {
     FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
     enableBLE();
+    startScan();
     super.initState();
   }
+
   enableBLE() async {
     // check if BLE is supported
     if (await FlutterBluePlus.isSupported == false) {
@@ -43,10 +45,31 @@ class _BubblesPageState extends State<BubblesPage> {
         .where((s) => s == BluetoothAdapterState.on)
         .first;
   }
+
 //-----------------------------Start the Scan-----------------------------
   startScan() async {
-    FlutterBluePlus.startScan(
-        timeout: const Duration(seconds: 4)); //Starts Scanning for Devices
+    FlutterBluePlus.startScan(); //Starts Scanning for Devices
+    // Put scan results in a list
+    List<ScanResult> scanResults = [];
+    // Listen for scan results
+    FlutterBluePlus.scanResults.listen((results) {
+      // Add scan results to list
+      for (ScanResult r in results) {
+        scanResults.add(r);
+      }
+    });
+    // Wait for scan to finish
+    await Future.delayed(const Duration(seconds: 4));
+    // Stop scan
+    stopScan();
+    // Remove duplicates from the list
+    scanResults = scanResults.toSet().toList();
+    // Sort the list by RSSI
+    scanResults.sort((a, b) => b.rssi.compareTo(a.rssi));
+    // Print scan results
+    for (ScanResult r in scanResults) {
+      print('${r.device.remoteId} found! rssi: ${r.rssi}');
+    }
   }
 //-----------------------------Stop the Scan-----------------------------
 
@@ -60,9 +83,7 @@ class _BubblesPageState extends State<BubblesPage> {
       title: 'Liste des canaux',
       body: RefreshIndicator(
         onRefresh: () {
-          return FlutterBluePlus.startScan(
-              timeout:
-                  const Duration(seconds: 4)); //Starts Scanning for Devices
+          return startScan();
         },
         child: Container(
           color: Colors.white,
