@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:pushtotalk/class/rainbow_user.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
+
+// Used as a bridge between Flutter and Kotlin code
 
 class PlatformRepository {
   static const platform = MethodChannel('flutter.native/helper');
@@ -47,4 +49,6 @@ class PlatformRepository {
     }
     return RainbowUser.fromMap(result);
   }
+
+  // TODO1 : Method to create / modify / delete bubbles
 }

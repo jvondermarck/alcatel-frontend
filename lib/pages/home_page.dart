@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:pushtotalk/class/rainbow_user.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/pages/bubbles_page.dart';
