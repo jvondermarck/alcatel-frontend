@@ -65,4 +65,17 @@ class RainbowServiceImpl: RainbowService {
         // TODO - (refactor) make it the right way with instance
         return isConnected
     }
+
+    override fun getRainbowUser(): Map<String, String?> {
+        val user = RainbowSdk.instance().myProfile().getConnectedUser()
+
+        return mapOf(
+            "id" to user?.id,
+            "firstName" to user?.firstName,
+            "lastName" to user?.lastName,
+            "companyName" to user?.companyName,
+            "email" to user?.getMainEmailAddress(),
+            "jobTitle" to user?.jobTitle,
+        )
+    }
 }
