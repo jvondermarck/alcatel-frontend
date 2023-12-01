@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/classes/bubble.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:pushtotalk/interfaces/locator.dart';
 import 'package:pushtotalk/services/locator_impl.dart';
 import 'package:pushtotalk/components/bubble_form_field.dart';
-import 'package:pushtotalk/classes/bubble.dart';
 import 'package:pushtotalk/interfaces/api.dart';
 import 'package:pushtotalk/repository/api_repository.dart';
 
@@ -131,6 +131,17 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                       onPressed: () {
                         setState(() {
                           if (formKey.currentState!.validate()) {
+                            String title = titleController.text;
+                            String subtitle = topicController.text;
+                            BubbleCard newBubble = BubbleCard(
+                              bubble: Bubble(
+                                name: title,
+                                topic: subtitle,
+                                longitude: double.parse(longitude),
+                                latitude: double.parse(latitude),
+                              ),
+                            );
+                            widget.onBubbleCreated(newBubble);
                             // TODO1 : Call method to create bubble from api_repository
                             Navigator.pop(context);
                           }

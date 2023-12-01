@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pushtotalk/class/rainbow_user.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:pushtotalk/components/bubble_creation_form.dart';

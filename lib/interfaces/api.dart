@@ -1,4 +1,4 @@
-import 'package:pushtotalk/class/bubble.dart';
+import 'package:pushtotalk/classes/bubble.dart';
 
 abstract class Api {
   Future<dynamic> getBubbles();

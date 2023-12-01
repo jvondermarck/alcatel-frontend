@@ -62,4 +62,12 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
             loginCallback, result
         )
     }
+
+    private fun logout(call: MethodCall, result: MethodChannel.Result) {
+        rainbowService.logout()
+    }
+
+    private fun getRainbowUser(call: MethodCall, result: MethodChannel.Result) {
+        result.success(rainbowService.getRainbowUser());
+    }
 }

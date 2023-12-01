@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:pushtotalk/class/rainbow_user.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
 
 // Used as a bridge between Flutter and Kotlin code
 

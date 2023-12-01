@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pushtotalk/class/rainbow_user.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/pages/home_page.dart';
 import 'package:pushtotalk/repository/platform_repository.dart';

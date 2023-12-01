@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/pages/voice_page.dart';
-import 'package:pushtotalk/class/bubble.dart';
+import 'package:pushtotalk/classes/bubble.dart';
 
 class BubbleCard extends StatefulWidget {
   final Bubble bubble;
