@@ -41,6 +41,7 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
                 call.method.equals("login") -> {
                     login(call, result)
                 }
+                // TODO : Method to create / modify / delete bubbles
             }
         }
     }
@@ -55,4 +56,7 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
             loginCallback, result
         )
     }
+
+    // TODO1 : Method to create / modify / delete bubbles
+
 }

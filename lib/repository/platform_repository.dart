@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+// Used as a bridge between Flutter and Kotlin code
+
 class PlatformRepository {
   static const platform = MethodChannel('flutter.native/helper');
 
@@ -26,4 +28,6 @@ class PlatformRepository {
     }
     return result;
   }
+
+  // TODO1 : Method to create / modify / delete bubbles
 }
