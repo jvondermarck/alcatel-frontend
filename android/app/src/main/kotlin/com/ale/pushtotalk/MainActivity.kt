@@ -2,7 +2,9 @@ package com.ale.pushtotalk
 
 import android.util.Log
 import androidx.annotation.NonNull
+import com.ale.pushtotalk.callback.BubbleCallbackImpl
 import com.ale.pushtotalk.callback.LoginCallbackImpl
+import com.ale.pushtotalk.interfaces.BubbleCallback
 import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.pushtotalk.services.RainbowServiceImpl
@@ -13,7 +15,9 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity(private val rainbowService: RainbowService = RainbowServiceImpl(),
-                   private val loginCallback: LoginCallback = LoginCallbackImpl()) :
+                   private val loginCallback: LoginCallback = LoginCallbackImpl(),
+                    private val bubbleCallback: BubbleCallback = BubbleCallbackImpl()
+) :
     FlutterActivity() {
 
     companion object {
@@ -48,8 +52,15 @@ class MainActivity(private val rainbowService: RainbowService = RainbowServiceIm
                     getRainbowUser(call, result)
                 }
                 // TODO : Method to create / modify / delete bubbles
+                call.method.equals("createBubble") -> {
+                    createBubble(call, result)
+                }
             }
         }
+    }
+
+    private fun createBubble(call: MethodCall, result: MethodChannel.Result) {
+        rainbowService.createBubble(call.argument<String>("name")!!, call.argument<String>("topic")!!, bubbleCallback, result)
     }
 
     private fun isRainbowSdkInitialized(result: MethodChannel.Result) {
