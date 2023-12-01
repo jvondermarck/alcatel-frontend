@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pushtotalk/classes/bubble.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:pushtotalk/interfaces/locator.dart';
+import 'package:pushtotalk/repository/platform_repository.dart';
 import 'package:pushtotalk/services/locator_impl.dart';
 import 'package:pushtotalk/components/bubble_form_field.dart';
+import 'package:pushtotalk/interfaces/api.dart';
+import 'package:pushtotalk/repository/api_repository.dart';
 
 class BubbleCreationForm extends StatefulWidget {
   final Function(BubbleCard) onBubbleCreated;
@@ -16,9 +20,11 @@ class BubbleCreationForm extends StatefulWidget {
 }
 
 class _BubbleCreationFormState extends State<BubbleCreationForm> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController subtitleController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController topicController = TextEditingController();
   Locator locator = LocatorImp();
+  Api apiRepository = ApiRepository();
+  PlatformRepository platformRepository = PlatformRepository();
 
   String longitude = '';
   String latitude = '';
@@ -50,8 +56,8 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                     BubbleFormField(
                       title: 'Nom',
                       icon: Icons.title,
-                      hint: 'Ex: titre super cool',
-                      controller: titleController,
+                      hint: 'Ex: nom super cool',
+                      controller: nameController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -60,7 +66,7 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                       title: 'Description',
                       icon: Icons.description,
                       hint: 'Ex: description tip top',
-                      controller: subtitleController,
+                      controller: topicController,
                     ),
                     const SizedBox(
                       height: 10,
@@ -127,18 +133,24 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                       onPressed: () {
                         setState(() {
                           if (formKey.currentState!.validate()) {
-                            String title = titleController.text;
-                            String subtitle = subtitleController.text;
-                            BubbleCard newBubble = BubbleCard(
-                              title: title,
-                              subtitle: subtitle,
-                            );
-                            widget.onBubbleCreated(newBubble);
+                            String name = nameController.text;
+                            String topic = topicController.text;
+                            platformRepository.createBubble(name, topic);
+                            // BubbleCard newBubble = BubbleCard(
+                            //   bubble: Bubble(
+                            //     name: name,
+                            //     topic: topic,
+                            //     longitude: double.parse(longitude),
+                            //     latitude: double.parse(latitude),
+                            //   ),
+                            // );
+                            // widget.onBubbleCreated(newBubble);
+                            // TODO1 : Call method to create bubble from api_repository
                             Navigator.pop(context);
                           }
                         });
-                        titleController.clear();
-                        subtitleController.clear();
+                        nameController.clear();
+                        topicController.clear();
                       },
                       label: const Text('Valider'),
                       icon: const Icon(Icons.check),

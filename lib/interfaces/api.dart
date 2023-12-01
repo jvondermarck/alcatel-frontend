@@ -1,5 +1,8 @@
+import 'package:pushtotalk/classes/bubble.dart';
+
 abstract class Api {
-  // test
-  Future<dynamic> get(String url);
-  Future<dynamic> post(String url, dynamic body);
+  Future<dynamic> getBubbles();
+  Future<dynamic> createBubble(Bubble bubble);
+  Future<dynamic> updateBubble();
+  Future<dynamic> deleteBubble();
 }

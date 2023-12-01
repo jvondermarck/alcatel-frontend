@@ -1,5 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:pushtotalk/classes/bubble.dart';
+import 'package:pushtotalk/classes/rainbow_user.dart';
+
+// Used as a bridge between Flutter and Kotlin code
 
 class PlatformRepository {
   static const platform = MethodChannel('flutter.native/helper');
@@ -25,5 +29,40 @@ class PlatformRepository {
       debugPrint("ERROR -> ${e.message}");
     }
     return result;
+  }
+
+  Future<bool> logout() async {
+    bool result = false;
+    try {
+      result = await platform.invokeMethod("logout", {});
+    } on PlatformException catch (e) {
+      debugPrint("ERROR -> ${e.message}");
+    }
+    return result;
+  }
+
+  Future<RainbowUser> getRainbowUser() async {
+    Map<Object?, Object?> result = {};
+    try {
+      result = await platform.invokeMethod("getRainbowUser", {});
+    } on PlatformException catch (e) {
+      debugPrint("ERROR -> ${e.message}");
+    }
+    return RainbowUser.fromMap(result);
+  }
+
+  // TODO1 : Method to create / modify / delete bubbles
+
+  Future<Bubble> createBubble(String name, String topic) async {
+    Map<Object?, Object?> result = {};
+    try {
+      result = await platform.invokeMethod("createBubble", {
+        "name": name,
+        "topic": topic,
+      });
+    } on PlatformException catch (e) {
+      debugPrint("ERROR -> ${e.message}");
+    }
+    return Bubble.fromMap(result);
   }
 }

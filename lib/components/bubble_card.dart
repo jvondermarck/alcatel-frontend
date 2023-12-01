@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/pages/voice_page.dart';
+import 'package:pushtotalk/classes/bubble.dart';
 
 class BubbleCard extends StatefulWidget {
-  final String title;
-  final String subtitle;
+  final Bubble bubble;
 
-  const BubbleCard({super.key, required this.title, required this.subtitle});
+  const BubbleCard({super.key, required this.bubble});
 
   @override
   State<BubbleCard> createState() => _BubbleCardState();
@@ -18,8 +18,8 @@ class _BubbleCardState extends State<BubbleCard> {
       padding: const EdgeInsets.only(top: 8.0),
       child: Card(
         child: ListTile(
-          title: Text(widget.title),
-          subtitle: Text(widget.subtitle),
+          title: Text(widget.bubble.name),
+          subtitle: Text(widget.bubble.topic),
           leading: const Icon(Icons.person),
           iconColor: Colors.black,
           textColor: Colors.black,
@@ -29,7 +29,8 @@ class _BubbleCardState extends State<BubbleCard> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => VoicePage(bubble: widget.title)));
+                        builder: (context) =>
+                            VoicePage(bubble: widget.bubble.name)));
               }),
         ),
       ),
