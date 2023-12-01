@@ -3,6 +3,7 @@ import 'package:pushtotalk/classes/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:pushtotalk/components/bubble_creation_form.dart';
+import 'package:pushtotalk/services/locator_impl.dart';
 import 'package:pushtotalk/pages/profile_page.dart';
 
 class BubblesPage extends StatefulWidget {
@@ -14,6 +15,14 @@ class BubblesPage extends StatefulWidget {
 }
 
 class _BubblesPageState extends State<BubblesPage> {
+  LocatorImp locator = LocatorImp();
+  @override
+  void initState() {
+    // print position
+    locator.getCurrentLocation().then((value) => print(value));
+    super.initState();
+  }
+
   List<BubbleCard> bubbleList = [];
   @override
   Widget build(BuildContext context) {
@@ -34,6 +43,7 @@ class _BubblesPageState extends State<BubblesPage> {
       title: 'Liste des canaux',
       body: RefreshIndicator(
         onRefresh: () async {
+          locator.getCurrentLocation().then((value) => print(value));
           await Future.delayed(const Duration(seconds: 2));
         },
         child: Container(
