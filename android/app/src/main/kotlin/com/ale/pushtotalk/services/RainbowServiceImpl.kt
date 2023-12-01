@@ -2,9 +2,15 @@ package com.ale.pushtotalk.services
 
 import android.app.Application
 import android.util.Log
+import com.ale.infra.manager.room.CreateRoomBody
+import com.ale.infra.manager.room.IRainbowRoom
+import com.ale.infra.manager.room.Room
 import com.ale.infra.rest.listeners.RainbowError
+import com.ale.infra.rest.listeners.RainbowListener
+import com.ale.infra.rest.room.RoomRepository
 import com.ale.listener.SigninResponseListener
 import com.ale.listener.SignoutResponseListener
+import com.ale.pushtotalk.interfaces.BubbleCallback
 import com.ale.pushtotalk.interfaces.LoginCallback
 import com.ale.pushtotalk.interfaces.RainbowService
 import com.ale.rainbow.RBLog
@@ -64,5 +70,40 @@ class RainbowServiceImpl: RainbowService {
     override fun isSignedIn(): Boolean {
         // TODO - (refactor) make it the right way with instance
         return isConnected
+    }
+
+    override fun getRainbowUser(): Map<String, String?> {
+        val user = RainbowSdk.instance().myProfile().getConnectedUser()
+
+        return mapOf(
+            "id" to user?.id,
+            "firstName" to user?.firstName,
+            "lastName" to user?.lastName,
+            "companyName" to user?.companyName,
+            "email" to user?.getMainEmailAddress(),
+            "jobTitle" to user?.jobTitle,
+        )
+    }
+
+    override fun createBubble(
+        name: String,
+        topic: String,
+        callback: BubbleCallback,
+        result: MethodChannel.Result
+    ) {
+        RainbowSdk.instance().bubbles().createBubble(
+            CreateRoomBody.Builder()
+                .name(name)
+                .topic(topic).build(),
+            object : RainbowListener<IRainbowRoom, RoomRepository.CreateRoomError> {
+                override fun onSuccess(room: IRainbowRoom) {
+                    callback.onBubbleCreated(room, result)
+                }
+
+                override fun onError(error: RainbowError<RoomRepository.CreateRoomError>) {
+                    // Do something in the thread UI
+                    Log.d("RainbowSdk", "onCreationFailed: $error")
+                }
+            })
     }
 }
