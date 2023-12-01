@@ -20,11 +20,30 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   void verifyForPermission() async {
     LocatorImp locator = LocatorImp();
-    bool permission = await locator.verifyPermission();
-    if (!permission) {
+    bool permissionGPS = await locator.verifyPermission();
+    if (!permissionGPS) {
       // Show a toast
       CustomSnackbar.showSnackbar(
           context, "Location permissions are denied", Colors.red, Colors.white);
+    }
+    BluetoothImpl bluetoothImpl = BluetoothImpl();
+    try {
+      bool permissionBluetooth = await bluetoothImpl.enableBLE();
+      if (!permissionBluetooth) {
+        // Show a toast
+        CustomSnackbar.showSnackbar(
+            context,
+            "Les autorisations Bluetooth sont refusées",
+            Colors.red,
+            Colors.white);
+      }
+    } catch (e) {
+      // If enableBLE() throws an exception, show a toast
+      CustomSnackbar.showSnackbar(
+          context,
+          "Une erreur s'est produite lors de l'activation du Bluetooth",
+          Colors.red,
+          Colors.white);
     }
   }
 

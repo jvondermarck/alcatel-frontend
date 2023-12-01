@@ -23,7 +23,14 @@ class BluetoothImpl implements Bluetooth {
     await FlutterBluePlus.adapterState
         .where((s) => s == BluetoothAdapterState.on)
         .first;
-    return false;
+    if (await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on) {
+      print("Bluetooth is on!");
+      return true;
+    } else {
+      // Seems didn't work
+      print("Bluetooth is off!");
+      return false;
+    }
   }
 
   @override

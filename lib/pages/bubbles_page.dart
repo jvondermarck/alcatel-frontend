@@ -48,6 +48,7 @@ class _BubblesPageState extends State<BubblesPage> {
       body: RefreshIndicator(
         onRefresh: () async {
           locator.getCurrentLocation().then((value) => print(value));
+          bluetoothImpl.startScan();
           await Future.delayed(const Duration(seconds: 2));
         },
         child: Container(
