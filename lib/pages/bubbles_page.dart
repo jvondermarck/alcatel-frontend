@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:pushtotalk/components/bubble_form_field.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:pushtotalk/services/bluetooth_impl.dart';
 
 class BubblesPage extends StatefulWidget {
   const BubblesPage({Key? key}) : super(key: key);
@@ -17,64 +15,11 @@ class _BubblesPageState extends State<BubblesPage> {
   List<BubbleCard> bubbleList = [];
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
-  FlutterBluePlus flutterBluePlus = FlutterBluePlus();
+  BluetoothImpl bluetoothImpl = BluetoothImpl();
   @override
   void initState() {
-    FlutterBluePlus.setLogLevel(LogLevel.verbose, color: true);
-    enableBLE();
-    startScan();
+    bluetoothImpl.startScan();
     super.initState();
-  }
-
-  enableBLE() async {
-    // check if BLE is supported
-    if (await FlutterBluePlus.isSupported == false) {
-      print("BLE is not supported by this device!");
-      return;
-    }
-
-    // turn on bluetooth ourself if we can
-    // for iOS, the user controls bluetooth enable/disable
-    if (Platform.isAndroid) {
-      await FlutterBluePlus.turnOn();
-    }
-
-    // wait bluetooth to be on
-    // note: for iOS the initial state is typically BluetoothAdapterState.unknown
-    await FlutterBluePlus.adapterState
-        .where((s) => s == BluetoothAdapterState.on)
-        .first;
-  }
-
-//-----------------------------Start the Scan-----------------------------
-  startScan() async {
-    FlutterBluePlus.startScan(); //Starts Scanning for Devices
-    // Put scan results in a list
-    List<ScanResult> scanResults = [];
-    // Listen for scan results
-    FlutterBluePlus.scanResults.listen((results) {
-      // Add scan results to list
-      for (ScanResult r in results) {
-        scanResults.add(r);
-      }
-    });
-    // Wait for scan to finish
-    await Future.delayed(const Duration(seconds: 4));
-    // Stop scan
-    stopScan();
-    // Remove duplicates from the list
-    scanResults = scanResults.toSet().toList();
-    // Sort the list by RSSI
-    scanResults.sort((a, b) => b.rssi.compareTo(a.rssi));
-    // Print scan results
-    for (ScanResult r in scanResults) {
-      print('${r.device.remoteId} found! rssi: ${r.rssi}');
-    }
-  }
-//-----------------------------Stop the Scan-----------------------------
-
-  stopScan() {
-    FlutterBluePlus.stopScan(); //Stop Scanning for Devices
   }
 
   @override
@@ -83,7 +28,7 @@ class _BubblesPageState extends State<BubblesPage> {
       title: 'Liste des canaux',
       body: RefreshIndicator(
         onRefresh: () {
-          return startScan();
+          return bluetoothImpl.startScan();
         },
         child: Container(
           color: Colors.white,

@@ -6,6 +6,7 @@ import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/pages/bubbles_page.dart';
 import 'package:pushtotalk/repository/platform_repository.dart';
 import 'package:pushtotalk/utils/custom_snackbar.dart';
+import 'package:pushtotalk/services/bluetooth_impl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,6 +16,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void verifyForPermission() async {
+    BluetoothImpl bluetoothImpl = BluetoothImpl();
+    bool permission = await bluetoothImpl.enableBLE();
+    // print permission value
+    print("Bluetooth permissions are granted: $permission");
+    print("coucou");
+    if (!permission) {
+      print("Bluetooth permissions are denied");
+      CustomSnackbar.showSnackbar(context, "Bluetooth permissions are denied",
+          Colors.red, Colors.white);
+    }
+  }
+
+  @override
+  void initState() {
+    verifyForPermission();
+    super.initState();
+  }
+
   static final PlatformRepository platformRepository = PlatformRepository();
   String title = "Push To Talk";
   bool isRainbowSdkInitialized = false;
