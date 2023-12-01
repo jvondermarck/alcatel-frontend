@@ -14,4 +14,11 @@ class Bubble {
     this.longitude = 0.0,
     this.creator = '',
   });
+
+  factory Bubble.fromMap(Map<Object?, Object?> map) {
+    return Bubble(
+      name: map['name'] as String,
+      topic: map['topic'] as String,
+    );
+  }
 }
