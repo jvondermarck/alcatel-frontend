@@ -5,6 +5,7 @@ import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/custom_text_field.dart';
 import 'package:pushtotalk/pages/bubbles_page.dart';
 import 'package:pushtotalk/repository/platform_repository.dart';
+import 'package:pushtotalk/services/locator_impl.dart';
 import 'package:pushtotalk/utils/custom_snackbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void verifyForPermission() async {
+    LocatorImp locator = LocatorImp();
+    bool permission = await locator.verifyPermission();
+    if (!permission) {
+      // Show a toast
+      CustomSnackbar.showSnackbar(
+          context, "Location permissions are denied", Colors.red, Colors.white);
+    }
+  }
+
+  @override
+  void initState() {
+    verifyForPermission();
+    super.initState();
+  }
+
   static final PlatformRepository platformRepository = PlatformRepository();
   String title = "Push To Talk";
   bool isRainbowSdkInitialized = false;
