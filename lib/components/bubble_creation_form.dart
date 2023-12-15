@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:pushtotalk/classes/bubble.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
 import 'package:geolocator/geolocator.dart';
@@ -133,9 +134,13 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                       onPressed: () {
                         setState(() {
                           if (formKey.currentState!.validate()) {
-                            String name = nameController.text;
-                            String topic = topicController.text;
-                            platformRepository.createBubble(name, topic);
+                            createBubbleAndNavigate(context);
+                            Navigator.pop(context);
+                            // String name = nameController.text;
+                            // String topic = topicController.text;
+                            // var bubbleInformation =
+                            //     platformRepository.createBubble(name, topic);
+                            // print("La grosse crotte : $bubbleInformation");
                             // BubbleCard newBubble = BubbleCard(
                             //   bubble: Bubble(
                             //     name: name,
@@ -146,7 +151,6 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
                             // );
                             // widget.onBubbleCreated(newBubble);
                             // TODO1 : Call method to create bubble from api_repository
-                            Navigator.pop(context);
                           }
                         });
                         nameController.clear();
@@ -163,5 +167,22 @@ class _BubbleCreationFormState extends State<BubbleCreationForm> {
         },
       ),
     );
+  }
+
+  Future<void> createBubbleAndNavigate(BuildContext context) async {
+    String name = nameController.text;
+    String topic = topicController.text;
+
+    try {
+      Bubble bubble = await platformRepository.createBubble(name, topic);
+      bubble.latitude = double.parse(latitude);
+      bubble.longitude = double.parse(longitude);
+
+      http.Response response = await apiRepository.createBubble(bubble);
+      print("Response status code: ${response.statusCode}");
+      print("Response body: ${response.body}");
+    } catch (error) {
+      print("Error creating bubble: $error");
+    }
   }
 }

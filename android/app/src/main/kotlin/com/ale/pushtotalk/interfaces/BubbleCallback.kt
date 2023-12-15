@@ -5,4 +5,5 @@ import io.flutter.plugin.common.MethodChannel
 
 interface BubbleCallback {
     fun onBubbleCreated(bubble: IRainbowRoom, result: MethodChannel.Result)
+    fun onBubbleCreationError(result: MethodChannel.Result)
 }

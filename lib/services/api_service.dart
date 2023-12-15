@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:pushtotalk/classes/bubble.dart';
 import 'package:pushtotalk/interfaces/api.dart';
 import 'package:http/http.dart' as http;
@@ -5,7 +7,7 @@ import 'package:http/http.dart' as http;
 // Class used to communicate with backend
 
 class ApiService implements Api {
-  final String baseUrl = 'http://ptt-api.fr:3000/bubbles';
+  final String baseUrl = 'https://ptt-api.fr/bubbles';
 
   @override
   Future<http.Response> getBubbles() {
@@ -14,9 +16,13 @@ class ApiService implements Api {
 
   @override
   Future<http.Response> createBubble(Bubble bubble) {
-    // TODO: implement createBubble
-
-    throw UnimplementedError();
+    return http.post(
+      Uri.parse(baseUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(bubble),
+    );
   }
 
   @override
