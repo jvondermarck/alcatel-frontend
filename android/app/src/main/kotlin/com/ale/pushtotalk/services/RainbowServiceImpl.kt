@@ -96,13 +96,12 @@ class RainbowServiceImpl: RainbowService {
                 .name(name)
                 .topic(topic).build(),
             object : RainbowListener<IRainbowRoom, RoomRepository.CreateRoomError> {
-                override fun onSuccess(room: IRainbowRoom) {
-                    callback.onBubbleCreated(room, result)
+                override fun onSuccess(bubble: IRainbowRoom) {
+                    callback.onBubbleCreated(bubble, result)
                 }
 
                 override fun onError(error: RainbowError<RoomRepository.CreateRoomError>) {
-                    // Do something in the thread UI
-                    Log.d("RainbowSdk", "onCreationFailed: $error")
+                    callback.onBubbleCreationError(result)
                 }
             })
     }

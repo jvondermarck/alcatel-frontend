@@ -54,15 +54,17 @@ class PlatformRepository {
   // TODO1 : Method to create / modify / delete bubbles
 
   Future<Bubble> createBubble(String name, String topic) async {
-    Map<Object?, Object?> result = {};
     try {
-      result = await platform.invokeMethod("createBubble", {
+      Map<Object?, Object?> result =
+          await platform.invokeMethod("createBubble", {
         "name": name,
         "topic": topic,
       });
+
+      return Bubble.fromMap(result);
     } on PlatformException catch (e) {
-      debugPrint("ERROR -> ${e.message}");
+      // Handle the platform exception, show a snackbar, etc.
+      throw Exception("Error creating bubble: ${e.message}");
     }
-    return Bubble.fromMap(result);
   }
 }

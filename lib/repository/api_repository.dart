@@ -9,7 +9,7 @@ class ApiRepository implements Api {
 
   @override
   Future createBubble(Bubble bubble) {
-    throw UnimplementedError();
+    return apiService.createBubble(bubble);
   }
 
   @override

@@ -11,8 +11,13 @@ class BubbleCallbackImpl : BubbleCallback{
         val roomInformation = mapOf(
             "id" to bubble.id,
             "name" to bubble.name,
+            "topic" to bubble.topic,
             "creatorId" to bubble.creatorId
         )
         return result.success(roomInformation)
+    }
+
+    override fun onBubbleCreationError(result: MethodChannel.Result) {
+        result.error("BUBBLE_CREATION_FAILED", "Bubble creation failed", null)
     }
 }
