@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pushtotalk/classes/rainbow_user.dart';
 import 'package:pushtotalk/components/base_scaffold.dart';
 import 'package:pushtotalk/components/bubble_card.dart';
+import 'package:pushtotalk/components/bubble_form_field.dart';
+import 'package:pushtotalk/services/bluetooth_impl.dart';
 import 'package:pushtotalk/components/bubble_creation_form.dart';
 import 'package:pushtotalk/services/locator_impl.dart';
 import 'package:pushtotalk/pages/profile_page.dart';
@@ -16,14 +18,16 @@ class BubblesPage extends StatefulWidget {
 
 class _BubblesPageState extends State<BubblesPage> {
   LocatorImp locator = LocatorImp();
+  BluetoothImpl bluetoothImpl = BluetoothImpl();
+  List<BubbleCard> bubbleList = [];
   @override
   void initState() {
     // print position
     locator.getCurrentLocation().then((value) => print(value));
+    bluetoothImpl.startScan();
     super.initState();
   }
 
-  List<BubbleCard> bubbleList = [];
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
@@ -44,6 +48,7 @@ class _BubblesPageState extends State<BubblesPage> {
       body: RefreshIndicator(
         onRefresh: () async {
           locator.getCurrentLocation().then((value) => print(value));
+          bluetoothImpl.startScan();
           await Future.delayed(const Duration(seconds: 2));
         },
         child: Container(
